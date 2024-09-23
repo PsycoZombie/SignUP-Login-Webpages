@@ -1,2 +1,2 @@
 # SignUP-Login-Webpages
-LEMP stack demo for a signup login system backed by database with  jQuery &amp; Bootstrap.
+a classic Student registration login system with database connectivity made using LEMP stack, Bootstrap for styling, and jQuery for data validation
