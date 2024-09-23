@@ -1,7 +1,9 @@
 <?php
+/*
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 $username=$_POST['username'];
 $password=$_POST['password'];
+*/
 echo"<br>";
 
 //make sure to enter your mysql credentials and other informations below
