@@ -1,0 +1,197 @@
+<!DOCTYPE HTMl>
+<HTML>
+	<head>
+	<title>Student Registration</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$.validator.addMethod("hasSpecialChar", function(value, element) {
+    		return this.optional(element) || /[!@#$%^&*()_+{}\[\]:;<>,.?~]/.test(value);
+			}, "password must contain at least one special character");
+			$.validator.addMethod("hasNumber", function(value, element) {
+    		return this.optional(element) || /[1234567890]/.test(value);
+			}, "password must contain at least one digit");
+			$.validator.addMethod("hasUpperCase", function(value, element) {
+    		return this.optional(element) || /[A-Z]/.test(value);
+			}, "password must contain at least one uppercase letter");
+			$.validator.addMethod("hasLowerCase", function(value, element) {
+    		return this.optional(element) || /[a-z]/.test(value);
+			}, "password must contain at least one lowercase letter");
+			jQuery.validator.addMethod("length", function(value, element, param) {
+		   return this.optional(element) || value.length >= param;
+			}, $.validator.format("please enter atleast {0} characters."));
+			$("#formid").validate(
+				{
+				rules: {
+					regno:{
+						digits:true,
+						range:[10000000,99999999]
+					},
+					pincode:{
+						digits:true,
+						range:[100000,999999]
+					},
+					adm_year:{
+						digits:true,
+						range:[1971,2024]
+					},
+					username:{
+						length:8
+						},
+					confirmpassword:{
+						equalTo:"#password",
+						hasSpecialChar:true,
+						hasNumber:true,
+						hasUpperCase:true,
+						hasLowerCase:true,
+						length:8
+					}
+				},
+				messages: {
+					regno:{
+						digits:"invalid register number",
+						range:"invalid register nummber",
+					},
+					pincode:{
+						digits:"invalid pincode",
+						range: "invalid pincode"
+					},
+					adm_year:{
+						digits:"invalid Year",
+						range: "invalid year"
+					},
+					confirmpassword:{
+						equalTo:"passwords do not match",
+					}
+				},
+				submitHandler:function(form){
+					form.submit();
+				}
+			}
+			);
+
+			$('.form-control').each(function() {
+    	    	$(this).rules('add', {
+        	    	required: true,
+            		messages: {
+                		required: "needed*"
+            		}
+        		});
+    		});
+
+		});
+
+	</script>
+	<style>
+		label.error {
+    		color: red;
+    		font-style: italic;
+			font-size: smaller;
+			font-family:Arial, Helvetica, sans-serif;
+		}
+	</style>
+
+	</head>
+	<BODY class="bg-info">
+		<p class="h1 text-center text-decoration-underline text-primary pt-3 pb-3" id="headingid"><strong>Student Registration Form</strong></p>
+		<div class="container col ps-5 px-5 bg-info text-muted border border-3 border-secondary mt-3" id="mainid">
+
+		<form action="newreg.php" method="POST" id="formid" class="pt-3 form-horizontal">
+
+			<div class="row">
+			<div class="col-sm-6">
+			<label for="name">Name</label>
+			<input type="text"placeholder="your name" id="name" maxlength="30" name="name" class="form-control">
+			</div>
+			<div class="col-sm-3">
+			<label for="course" >Course</label>
+			<input type="text"placeholder="course code" name="course" class="form-control">
+			</div>
+			<div class="col-sm-3">
+			<label for="semester" >Semester</label>
+			<select type="text" placeholder="current semester" name="semester" class="form-select">
+				<option>I</option>
+				<option>II</option>
+				<option>III</option>
+				<option>IV</option>
+				<option>V</option>
+				<option>VI</option>
+				<option>VII</option>
+				<option>VIII</option>
+			</select>
+			</div>
+			</div>
+
+			<div class="row">
+			<div class="col-sm-4">
+			<label for="regno" >Register number</label>
+			<input type="number" autofocus placeholder="enter register number" name="regno" class="form-control">
+			</div>
+			<div class="col-sm-4">
+			<label for="adm_year" >Year of joining</label>
+			<input type="number" placeholder="year of admission" name="adm_year" class="form-control">
+			</div>
+			<div class="col-sm-4">
+			<label for="dob" >DOB</label>
+			<input type="datetime-local" placeholder="date of birth" name="dob" class="form-control">
+			</div>
+			</div>
+
+			<div class="row">
+			<div class="col-sm-4">
+			<label for="district" >District</label>
+			<input type="text" placeholder="district" maxlength="50" name="district" class="form-control">
+			</div>
+			<div class="col-sm-4">
+			<label for="state" >State</label>
+			<input type="text" placeholder="state" maxlength="50" name="state" class="form-control">
+			</div>
+			<div class="col-sm-4">
+			<label for="country" >Country</label>
+			<input type="text" placeholder="country" maxlength="10" name="country" class="form-control">
+			</div>
+			</div>
+			
+			<div class="row pb-3">
+			<div class="col-sm-4">
+			<label for="pincode" >Pincode</label>
+			<input type="number" placeholder="pincode" name="pincode" class="form-control">
+			</div>
+			<div class="col-sm-8">
+			<label for="address" >Address</label>
+			<input type="text" placeholder="permanent address" name="address" class="form-control">
+			</div>
+			</div>
+			<hr style="height:3px">
+			<div class="row">
+				<div class="col-sm-12">
+					<label for="username">Username</label>
+					<input type="text" maxlength="30" placeholder="enter a username" name="username" class="form-control">
+				</div>
+				<div class="col-sm-12 pb-1">
+					<label for="password">Password    (should contain atleast 1: lowercase, uppercase, number, special character)</label>
+					<input type="password" id="password" placeholder="enter a password" name="password" class="form-control">
+				</div>
+				<div class="col-sm-12">
+					<input type="password" placeholder="retype your password" name="confirmpassword" class="form-control bg-info">
+				</div>
+
+			</div>
+
+
+			<div class="row">
+			<div class="col-xs-12 text-center">
+			<button type="submit" id="submitid" class="btn text-success btn-warning col-sm-3 mt-3 mb-3"><strong>Sign Up</strong></button>
+			</div>
+			</div>
+		</form>
+		</div>
+		<p class="text-center text-muted">Already have an account? <a href="login.html">Login</a>.</p>
+	</BODY>
+</HTML>
