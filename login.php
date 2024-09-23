@@ -3,7 +3,17 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 $username=$_POST['username'];
 $password=$_POST['password'];
 echo"<br>";
-$con=new mysqli("localhost","viswajithks_20222108","20222108","animals","3306","");
+
+//make sure to enter your mysql credentials and other informations below
+$mysqlhost="";
+$mysqlusr="";
+$mysqlpass="";
+$mysqldbname="";
+$mysqlport="";
+$mysqlsocket="";
+
+
+$con=new mysqli($mysqlhost,$mysqlusr,$mysqlpass,$mysqldbname,$mysqlport,$mysqlsocket);
 $query="select * from auth where username=\"".$username."\";";
 $doquerry=mysqli_query($con,$query);
 if(mysqli_num_rows($doquerry)==0)
