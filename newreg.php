@@ -1,13 +1,18 @@
 <?php
+/*
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-$host="localhost";
-$port=3306;
+*/
+
+//make sure to enter your mysql credentials and other details below
+$host="";
+$port="";
 $socket="";
-$user="viswajithks_20222108";
-$password="20222108";
-$dbname="animals";
+$user="";
+$password="";
+$dbname="";
+
 $con = new mysqli($host, $user, $password, $dbname, $port, $socket)
 	or die ('Could not connect to the database server' . mysqli_connect_error());
 $regno=htmlspecialchars($_POST['regno']);
@@ -35,7 +40,7 @@ try {
 $con->close();
 $username=htmlspecialchars($_POST['username']);
 $password=htmlspecialchars($_POST['password']);
-$con=new mysqli("localhost","viswajithks_20222108","20222108","animals","3306","");
+$con = new mysqli($host, $user, $password, $dbname, $port, $socket)
 $query="select sid from studentslist where regno=".$regno.";";
 $sid="";
 $doquerry=mysqli_query($con,$query);
